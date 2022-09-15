@@ -1,0 +1,5 @@
+INSERT INTO PARTCIPANT VALUES ( 'Ben', 'S', 'null', '07-04-2002');
+INSERT INTO PARTCIPANT VALUES ( 's', 's', 's', 's');
+INSERT INTO PRODUCT VALUES ( 's', 's', '233', '34');
+INSERT INTO PARTCIPANT VALUES ( 's', 's', 'null', 's');
+INSERT INTO PARTCIPANT VALUES ( 's', 's', 's', 's');
