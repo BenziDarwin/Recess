@@ -25,13 +25,13 @@ Route::get('/', function () {
     );
 });
 
-Route::get('/listings/{Participant}{Product}', function ($id) {
+Route::get('/items/{participantID}/{productID}', function ($participantID, $productID) {
     return view(
-        "item",
+        "product",
         [
             'heading' => "Anka Services",
-            "participant" => Participants::find($id),
-            "item" => Products::find($id)
+            "participant" => Participants::find($participantID),
+            "product" => Products::find($productID)
         ]
     );
 });

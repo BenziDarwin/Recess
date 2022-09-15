@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->boolean("status")->default(false);
             $table->integer("price");
             $table->integer("quantity");
+            $table->unsignedInteger("participantID");
             $table->foreign("participantID")->references("participantID")->on("Participants");
         });
     }

@@ -3,7 +3,7 @@ import java.io.FileWriter;
 import java.io.Console;
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.InputMismatchException;
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
@@ -20,12 +20,10 @@ public class Main {
     static String product;
     static String date;
     static String value;
-    static String url;
     static boolean x = true;
-    public static String insertS = "INSERT INTO PARTCIPANT VALUES ( '%s', '%s', '%s', '%s');\n";
-    public static String insertP = "INSERT INTO PRODUCT VALUES ( '%s', '%s', '%s', '%s');\n";
+    static int count = 1;
 
-    public static void main(String[] args) throws IOException, SQLException {
+    public static void main(String[] args) throws IOException, InputMismatchException {
         while (x == true) {
             System.out.println("Press the numbers to select an option.");
             System.out.println("1. Login");
@@ -35,20 +33,22 @@ public class Main {
             switch (command) {
                 case "1":
                     System.out.println("Enter your name:");
-                    sName = sc.next();
+                    sName = sc.nextLine();
+                    sc.nextLine();
                     System.out.println("Enter your password:");
                     password = new String(console.readPassword());
-
                 case "2":
                     System.out.println("Enter your name:");
-                    sName = sc.next();
+                    sc.nextLine();
+                    sName = sc.nextLine();
                     System.out.println("Enter your password:");
                     password = new String(console.readPassword());
                     System.out.println("Enter your product:");
-                    product = sc.next();
-                    System.out.println("Enter your date of birth(mm-dd-yyyy):");
+                    pName = sc.nextLine();
+                    System.out.println("Enter your date of birth(yyyy-mm-dd):");
                     date = sc.next();
-                    value = String.format(insertS, sName, password, product, date);
+                    String insertS = "INSERT INTO PARTCIPANTS (Name, password, product, DOB) VALUES ('%s', '%s', '%s' ,DATE '%s');\n";
+                    value = String.format(insertS, sName, password, pName, date);
                     if (path.exists() == true) {
                         file = new FileWriter("./file.sql", true);
                         file.write(value);
@@ -85,17 +85,23 @@ public class Main {
                     break;
                 case "2":
                     System.out.println("Enter the product name:");
-                    pName = sc.next();
-                    if (pName != product) {
-                        System.out.println("Cannot enter two different products!");
-                        break;
-                    }
+                    sc.nextLine();
+                    pName = sc.nextLine();
                     System.out.println("Enter the description:");
-                    description = sc.next();
+                    description = sc.nextLine();
                     System.out.println("Enter the price:");
                     price = sc.nextInt();
                     System.out.println("Enter the quantity:");
                     quantity = sc.nextInt();
+                    boolean status;
+                    System.out.println(quantity);
+                    if (quantity <= 0) {
+                        status = false;
+                    } else {
+                        status = true;
+                    }
+                    String insertP = "INSERT INTO PRODUCTS(ProductName,description,price,quantity,status,participantID) VALUES ('%s', '%s', '%d' ,'%d',"
+                            + status + "," + count + ";);\n";
                     value = String.format(insertP, pName, description, price, quantity);
                     if (path.exists() == true) {
                         file = new FileWriter("./file.sql", true);
@@ -119,6 +125,6 @@ public class Main {
             }
         }
 
-        System.out.println("Thank you for using!" + sName);
+        System.out.println("Thank you for using " + sName + "!");
     }
 }

@@ -28,19 +28,19 @@
                 @foreach($products as $product)
                     <div class="grid-item">
                         @if($participant['participantID'] == $product['participantID'])
-                            <a href="/items/{{$participant['participantID']}}{{$product['productID']}}"><h2>{{$participant['ProductName']}}</h2></a>
+                            <a href="/items/{{$participant['participantID']}}/{{$product['productID']}}"><h2>{{$participant['Name']}}</h2></a>
                             <p>{{$product["description"]}}</p>
                         @endif
                     </div>
                     <div class="grid-item">
                         @if($participant['participantID'] == $product['participantID'])
-                            <a href="/items/{{$participant['participantID']}}{{$product['productID']}}"><h2>{{$participant['ProductName']}}</h2></a>
+                            <a href="/items/{{$participant['participantID']}}/{{$product['productID']}}"><h2>{{$participant['Name']}}</h2></a>
                             <p>{{$product["description"]}}</p>
                         @endif
                     </div>
                     <div class="grid-item">
                         @if($participant['participantID'] == $product['participantID'])
-                            <a href="/items/{{$participant['participantID']}}{{$product['productID']}}"><h2>{{$participant['ProductName']}}</h2></a>
+                            <a href="/items/{{$participant['participantID']}}/{{$product['productID']}}"><h2>{{$participant['Name']}}</h2></a>
                             <p>{{$product["description"]}}</p>
                         @endif
                     </div>

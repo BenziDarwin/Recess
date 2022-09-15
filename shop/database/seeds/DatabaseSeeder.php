@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //$this->call(UsersTableSeeder::class);
-        App\User::factory(10)->create();
+        Illuminate\Database\Query\Builder::factory(10)->create();
         Participants::create([
             "particiantID" => "3",
             "Name" => "Alex",

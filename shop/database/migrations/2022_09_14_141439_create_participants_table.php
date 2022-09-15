@@ -18,7 +18,8 @@ class CreateParticipantsTable extends Migration
             $table->string("Name");
             $table->date("DOB");
             $table->string("password");
-            $table->integer("performance");
+            $table->string("product");
+            $table->integer("performance")->nullable(true);
         });
     }
 
