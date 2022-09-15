@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,8 +13,9 @@
 |
 */
 
-use App\Participants;
-use App\Products;
+use App\Models\Participants;
+use App\Models\Products;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view(
@@ -24,7 +27,7 @@ Route::get('/', function () {
         ]
     );
 });
-
+Auth::routes();
 Route::get('/items/{participantID}/{productID}', function ($participantID, $productID) {
     return view(
         "product",

@@ -7,7 +7,9 @@
     <title>{{$product["ProductName"]}}</title>
 </head>
 <body>
-    <h2>{{$product["ProductName"]}}</h2>
-    <p>{{$product["description"]}}</p>
+    <center>
+        <h2>{{$product["ProductName"]}}</h2>
+        <p>{{$product["description"]}}</p>
+    </center>
 </body>
 </html>

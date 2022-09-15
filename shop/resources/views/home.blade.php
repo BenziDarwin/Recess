@@ -22,6 +22,7 @@
 </head>
 
 <body>
+    <a href="/login"><div>{{_("login")}}</div></a>
     <center><div><h1>{{$heading}}</h1></div> </center>
         <div class="grid-container">
             @foreach ($participants as $participant)
