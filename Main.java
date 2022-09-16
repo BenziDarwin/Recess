@@ -26,18 +26,11 @@ public class Main {
     public static void main(String[] args) throws IOException, InputMismatchException {
         while (x == true) {
             System.out.println("Press the numbers to select an option.");
-            System.out.println("1. Login");
-            System.out.println("2. Register");
+            System.out.println("1. Register");
             System.out.println("Enter 'exit' to exit.");
             command = sc.next();
             switch (command) {
                 case "1":
-                    System.out.println("Enter your name:");
-                    sName = sc.nextLine();
-                    sc.nextLine();
-                    System.out.println("Enter your password:");
-                    password = new String(console.readPassword());
-                case "2":
                     System.out.println("Enter your name:");
                     sc.nextLine();
                     sName = sc.nextLine();
@@ -100,7 +93,7 @@ public class Main {
                     } else {
                         status = true;
                     }
-                    String insertP = "INSERT INTO PRODUCTS(ProductName,description,price,quantity,status,participantID) VALUES ('%s', '%s', '%d' ,'%d',"
+                    String insertP = "INSERT INTO PRODUCTS( ProductName, description, price, quantity, status, participantID) VALUES ('%s', '%s', '%d' ,'%d',"
                             + status + "," + count + ";);\n";
                     value = String.format(insertP, pName, description, price, quantity);
                     if (path.exists() == true) {
