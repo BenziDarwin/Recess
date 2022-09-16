@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.Console;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.InputMismatchException;
 
 public class Main {
@@ -27,7 +28,7 @@ public class Main {
         while (x == true) {
             System.out.println("Press the numbers to select an option.");
             System.out.println("1. Register");
-            System.out.println("Enter 'exit' to exit.");
+            System.out.println("2. next");
             command = sc.next();
             switch (command) {
                 case "1":
@@ -40,7 +41,7 @@ public class Main {
                     pName = sc.nextLine();
                     System.out.println("Enter your date of birth(yyyy-mm-dd):");
                     date = sc.next();
-                    String insertS = "INSERT INTO PARTCIPANTS (Name, password, product, DOB) VALUES ('%s', '%s', '%s' ,DATE '%s');\n";
+                    String insertS = "INSERT INTO PARTICIPANTS (Name, password, product, DOB) VALUES ('%s', '%s', '%s' ,DATE '%s');\n";
                     value = String.format(insertS, sName, password, pName, date);
                     if (path.exists() == true) {
                         file = new FileWriter("./file.sql", true);
@@ -55,7 +56,10 @@ public class Main {
                     }
                     x = false;
                     break;
-                case "exit":
+                case "2":
+                    System.out.println("Enter your name:");
+                    sc.nextLine();
+                    sName = sc.nextLine();
                     x = false;
                     break;
                 default:
@@ -73,7 +77,8 @@ public class Main {
             command = sc.next();
             switch (command) {
                 case "1":
-                    System.out.println("Your information is being fetched from the database, it will be available at ");
+                    System.out.println("Your information is being fetched from the database, it will be available at "
+                            + new Date().toString());
                     x = false;
                     break;
                 case "2":
@@ -113,7 +118,6 @@ public class Main {
                     break;
                 default:
                     System.out.println("Invalid input!");
-                    x = false;
                     break;
             }
         }
