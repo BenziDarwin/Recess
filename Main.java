@@ -1,8 +1,13 @@
 import java.util.Scanner;
+
+import javax.smartcardio.CommandAPDU;
+
 import java.io.FileWriter;
 import java.io.Console;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.InputMismatchException;
 
@@ -12,116 +17,39 @@ public class Main {
     public static FileWriter file;
     public static Console console = System.console();
     public static File path = new File("./file.sql");
-    static String sName;
-    static String pName;
-    static String description;
-    static int price;
-    static int quantity;
-    static String password;
-    static String product;
-    static String date;
-    static String value;
-    static boolean x = true;
-    static int count = 1;
+    int n = 1;
+
+    public String[] makeNewList(String[] _list, String x) {
+        if (_list.length <= 0) {
+            newList = new String[x];
+            newList[obj.n - 1] = obj.value;
+        }
+        return new String[x];
+    }
 
     public static void main(String[] args) throws IOException, InputMismatchException {
-        while (x == true) {
-            System.out.println("Press the numbers to select an option.");
-            System.out.println("1. Register");
-            System.out.println("2. next");
-            command = sc.next();
-            switch (command) {
-                case "1":
-                    System.out.println("Enter your name:");
-                    sc.nextLine();
-                    sName = sc.nextLine();
-                    System.out.println("Enter your password:");
-                    password = new String(console.readPassword());
-                    System.out.println("Enter your product:");
-                    pName = sc.nextLine();
-                    System.out.println("Enter your date of birth(yyyy-mm-dd):");
-                    date = sc.next();
-                    String insertS = "INSERT INTO PARTICIPANTS (Name, password, product, DOB) VALUES ('%s', '%s', '%s' ,DATE '%s');\n";
-                    value = String.format(insertS, sName, password, pName, date);
-                    if (path.exists() == true) {
-                        file = new FileWriter("./file.sql", true);
-                        file.write(value);
-                        file.close();
-                        System.out.println(value);
-                    } else {
-                        file = new FileWriter("./file.sql");
-                        file.write(value);
-                        file.close();
-                        System.out.println(value);
-                    }
-                    x = false;
-                    break;
-                case "2":
-                    System.out.println("Enter your name:");
-                    sc.nextLine();
-                    sName = sc.nextLine();
-                    x = false;
-                    break;
-                default:
-                    System.out.println("Invalid input!");
-                    x = false;
-                    break;
-            }
+        System.out.println("Register name password product date_of_birth");
+        System.out.println("Post_product product_name description");
+        System.out.println("Performance");
+        command = sc.next();
+        if (command.equalsIgnoreCase("register")) {
+            System.out.println("Register name password product date_of_birth");
+            String name = sc.next();
+            String password = sc.next();
+            String product = sc.next();
+            String date_of_birth = sc.next();
+            String insertParticipant = "INSERT INTO PARTICIPANTS (name, password, product, date_of_birth) VALUES (%s, %s, %s, %s);";
+            String value = String.format(insertParticipant, name, password, product, date_of_birth);
+            System.out.println(value);
+        } else if (command.equalsIgnoreCase("post_product")) {
+            System.out.println("Post_product product_name description");
+            String product_name = sc.next();
+            String description = sc.nextLine();
+            String insertProducts = "INSERT INTO PRODUCTS (name, description) VALUES (%s, %s);";
+            String value = String.format(insertProducts, product_name, description);
+            System.out.println(value);
+        } else if (command.equalsIgnoreCase("performance")) {
+            System.out.println("Your performance info.");
         }
-        x = true;
-        while (x == true) {
-            System.out.println("Press the numbers to select an option.");
-            System.out.println("1. Request info.");
-            System.out.println("2. Add product info.");
-            System.out.println("Enter 'exit' to exit.");
-            command = sc.next();
-            switch (command) {
-                case "1":
-                    System.out.println("Your information is being fetched from the database, it will be available at "
-                            + new Date().toString());
-                    x = false;
-                    break;
-                case "2":
-                    System.out.println("Enter the product name:");
-                    sc.nextLine();
-                    pName = sc.nextLine();
-                    System.out.println("Enter the description:");
-                    description = sc.nextLine();
-                    System.out.println("Enter the price:");
-                    price = sc.nextInt();
-                    System.out.println("Enter the quantity:");
-                    quantity = sc.nextInt();
-                    boolean status;
-                    System.out.println(quantity);
-                    if (quantity <= 0) {
-                        status = false;
-                    } else {
-                        status = true;
-                    }
-                    String insertP = "INSERT INTO PRODUCTS( ProductName, description, price, quantity, status, participantID) VALUES ('%s', '%s', '%d' ,'%d',"
-                            + status + "," + count + ";);\n";
-                    value = String.format(insertP, pName, description, price, quantity);
-                    if (path.exists() == true) {
-                        file = new FileWriter("./file.sql", true);
-                        file.write(value);
-                        file.close();
-                        System.out.println(value);
-                    } else {
-                        file = new FileWriter("./file.sql");
-                        file.write(value);
-                        file.close();
-                        System.out.println(value);
-                    }
-                    x = false;
-                    break;
-                case "exit":
-                    break;
-                default:
-                    System.out.println("Invalid input!");
-                    break;
-            }
-        }
-
-        System.out.println("Thank you for using " + sName + "!");
     }
 }
