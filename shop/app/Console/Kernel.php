@@ -15,9 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            info("Logged every minute.");
-        })->everyMinute();
+        $schedule->command("insert:data")->everyMinute();
+        $schedule->command("get:performance")->everyMinute();
     }
 
     /**

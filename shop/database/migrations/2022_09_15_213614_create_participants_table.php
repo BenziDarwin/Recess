@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date("DOB");
             $table->string("password");
             $table->string("product");
-            $table->integer("performance")->nullable(true);
+            $table->integer("performance")->default(0);
         });
     }
 
