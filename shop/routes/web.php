@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,12 @@ Route::get('/', function () {
         ]
     );
 });
+
+Route::get('/dashboard', function () {
+    return view(
+        'dashboard'
+    );
+});
 Auth::routes();
 Route::get('/items/{participantID}/{productID}', function ($participantID, $productID) {
     return view(
@@ -38,3 +45,5 @@ Route::get('/items/{participantID}/{productID}', function ($participantID, $prod
         ]
     );
 });
+
+Route::post("/authenticate", [CustomersController::class, "authenticate"]);

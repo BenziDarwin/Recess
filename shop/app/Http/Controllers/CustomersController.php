@@ -4,51 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Customers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class CustomersController extends Controller
 {
-    public function index()
+    public function login()
     {
-        $customers = Customers::all();
-        return view("participants.index")->with("participants", $customers);
+        return view('login');
     }
 
-    public function create()
+    public function authenticate(Request $request)
     {
-        return ("customers.create");
-    }
-
-    public function store(Request $request)
-    {
-        $input = $request->all();
-        Customers::create($input);
-        return redirect('customer')->with('flash_message', 'Customer Added!');
-    }
-
-    public function show($id)
-    {
-        $customer = Customers::find($id);
-        return view('particpants.show')->with('participants', $customer);
-    }
-
-    public function edit($id)
-    {
-        $customer = Customers::find($id);
-        return view('particpants.edit')->with('participants', $customer);
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        $customer = Customers::find($id);
-        $input = $request->all();
-        $customer->update($input);
-        return redirect('customer')->with('flash_message', 'customer Updated!');
-    }
-
-    public function destroy($id)
-    {
-        Customers::destroy($id);
-        return redirect('customer')->with('flash_message', 'customer deleted!');
+        if (Auth::guard('customer')->attempt(['name' => $request->name, 'password' =>
+        $request->password], $request->remember)) {
+            return redirect()->intended(route('home'));
+        }
+        return back()->withErrors(["failed" => "Invalid username or password!"]);
     }
 }

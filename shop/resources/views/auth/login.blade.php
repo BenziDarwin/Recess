@@ -6,11 +6,13 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
+                @error("failed")
+                <center class="m-3">{{$message}}</center>
+                @enderror
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="/authenticate">
                         @csrf
-
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 

@@ -28,8 +28,7 @@ class insertData extends Command
      */
     public function handle()
     {
-        info("Data is being inserted.");
         DB::unprepared(file_get_contents('./file.sql'));
-        info("Data has been inserted.");
+        unlink('./file.sql');
     }
 }
