@@ -1,6 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .grid-container {
+        gap: 10px;
+        display: grid;
+        margin-top: 10px;
+        grid-template-columns: 200px 200px;
+    }
+
+    .grid-item {
+        width: 700px;
+        height: auto;
+    }
+</style>
 <div class="container">
 <center><div><h1>{{_("Anka Business Support Services")}}</h1></div> </center>
     <div class="grid-container">

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -36,5 +39,37 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function getLogin()
+    {
+        return view('auth.login');
+    }
+    public function postLogin(Request $request)
+    {
+        // Validate the form data
+        $this->validate($request, [
+            'name' => 'required',
+            'password' => 'required',
+        ]);
+        // Attempt to log the user in
+        dd($request);
+        if (Auth::guard('admin')->attempt(['name' => $request->name, 'password' => $request->password])) {
+            // if successful, then redirect to their intended location
+            dd("correct");
+            return redirect()->intended('/dashboard');
+        } else if (Auth::guard('customer')->attempt(['name' => $request->name, 'password' => $request->password])) {
+            dd("correct");
+            return redirect()->intended('/home');
+        }
+    }
+    public function logout()
+    {
+        if (Auth::guard('admin')->check()) {
+            Auth::guard('admin')->logout();
+        } elseif (Auth::guard('customer')->check()) {
+            Auth::guard('customer')->logout();
+        }
+        return redirect('/');
     }
 }

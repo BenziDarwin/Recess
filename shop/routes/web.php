@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ReceiptController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +36,7 @@ Route::get('/dashboard', function () {
         'dashboard'
     );
 });
-Auth::routes();
+
 Route::get('/items/{participantID}/{productID}', function ($participantID, $productID) {
     return view(
         "product",
@@ -45,5 +47,13 @@ Route::get('/items/{participantID}/{productID}', function ($participantID, $prod
         ]
     );
 });
+Auth::routes();
+Route::get('/logout', [LoginController::class, 'logout']);
 
-Route::post("/authenticate", [CustomersController::class, "authenticate"]);
+Route::get('/login', [LoginController::class, "getLogin"])->name('login');
+
+Route::post('/create', [RegisterController::class, "createCustomer"])->name('create');
+
+Route::post('/authenticate', [LoginController::class, 'postLogin'])->name("authenticate");
+
+Route::post('/purchase', [ReceiptController::class, "addToReceiptTable"])->name('purchase');

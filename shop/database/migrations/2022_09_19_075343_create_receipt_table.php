@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('Receipt', function (Blueprint $table) {
+        Schema::create('Receipts', function (Blueprint $table) {
             $table->string("customerName")->default();
             $table->unsignedInteger("participantID");
             $table->integer("quantity");

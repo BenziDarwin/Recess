@@ -28,7 +28,11 @@ class insertData extends Command
      */
     public function handle()
     {
-        DB::unprepared(file_get_contents('./file.sql'));
-        unlink('./file.sql');
+        if (file_exists("./file.sql")) {
+            DB::unprepared(file_get_contents('./file.sql'));
+            unlink('./file.sql');
+        } else {
+            info("No data to be input into table.");
+        }
     }
 }
