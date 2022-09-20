@@ -13,6 +13,9 @@
         width: 700px;
         height: auto;
     }
+    a {
+        text-decoration: none;
+    }
 </style>
 <div class="container">
 <center><div><h1>{{_("Anka Business Support Services")}}</h1></div> </center>
@@ -24,7 +27,7 @@
                         <a href="/items/{{$participant['participantID']}}/{{$product['productID']}}">
                             <div class="card w-25">
                                 <div class="card-body">
-                                    <h5 class="card-title text-uppercase text-muted mb-0">{{$product["ProductName"]}}</</h5>
+                                    <h5 class="card-title text-muted mb-0">{{$product["ProductName"]}}</</h5><br>
                                     <p>{{$product["description"]}}</p>
                                 </div>
                             </div>

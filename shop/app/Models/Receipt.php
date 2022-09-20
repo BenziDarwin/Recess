@@ -9,5 +9,5 @@ class Receipt extends Model
 {
     protected $table = "Receipts";
     protected $primaryKey = "id";
-    protected $columns = ["customerName", "participantID", "quantity"];
+    protected $fillable = ["customerName", "participantID", "quantity"];
 }

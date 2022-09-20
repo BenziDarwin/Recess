@@ -4,8 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <h2>{{$product["ProductName"]}}</h2>
+            <h1>{{$product["ProductName"]}}</h1>
             <p>{{$product["description"]}}</p>
+            <h3><span>Seller:&nbsp;</span>{{$participant["Name"]}}</h3>
         </div>
         <div class="col-6">
             <form method="POST" action="{{route('purchase')}}">
@@ -17,7 +18,7 @@
                 </div>
                 <div>
                     <input id="participantID" type="hidden"  name="participantID" value={{$product["participantID"]}}>
-                </div>
+                </div><br>
                 <button type="submit" class="btn btn-primary">
                     {{ __('Purchase') }}
                 </button>
