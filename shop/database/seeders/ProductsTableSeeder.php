@@ -40,6 +40,13 @@ class ProductsTableSeeder extends Seeder
                 'description' => ' We sell all kinds of animals straight from the farm.',
                 'participantID' => 3,
             ),
+            3 => 
+            array (
+                'productID' => 4,
+                'ProductName' => 'Phones',
+                'description' => ' We sell the best phones, We also offer repair services for all kinds of phones.',
+                'participantID' => 4,
+            ),
         ));
         
         

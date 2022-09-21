@@ -53,13 +53,12 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
         // Attempt to log the user in
-        dd($request);
         if (Auth::guard('admin')->attempt(['name' => $request->name, 'password' => $request->password])) {
             // if successful, then redirect to their intended location
-            dd("correct");
+            dd("correct Admin");
             return redirect()->intended('/dashboard');
         } else if (Auth::guard('customer')->attempt(['name' => $request->name, 'password' => $request->password])) {
-            dd("correct");
+            dd("correct Customer");
             return redirect()->intended('/home');
         }
     }

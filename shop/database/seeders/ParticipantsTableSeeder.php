@@ -46,6 +46,15 @@ class ParticipantsTableSeeder extends Seeder
                 'product' => 'Animals',
                 'performance' => 0,
             ),
+            3 => 
+            array (
+                'participantID' => 4,
+                'Name' => 'Peter',
+                'DOB' => '2000-08-23',
+                'password' => 'password',
+                'product' => 'Phones',
+                'performance' => 0,
+            ),
         ));
         
         

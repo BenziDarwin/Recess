@@ -47,7 +47,7 @@ public class Main {
             String insertParticipant = "INSERT INTO PARTICIPANTS (name, password, product, DOB) VALUES ('%s', '%s', '%s', '%s');\n";
             String value = String.format(insertParticipant, name, password, product, date_of_birth);
             file.write(value);
-            System.out.println(value);
+            System.out.println("Data inserted!");
             // Add Product
             System.out.println("Post_product product_name description");
             String product_name = sc.next();
@@ -55,7 +55,7 @@ public class Main {
             String insertProducts = "INSERT INTO PRODUCTS (ProductName, description, participantID) VALUES ('%s', '%s', "
                     + num + ");\n";
             value = String.format(insertProducts, product_name, description);
-            System.out.println(value);
+            System.out.println("Data inserted!");
             file.write(value);
             file.close();
         } else if (command.equalsIgnoreCase("performance")) {

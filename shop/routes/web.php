@@ -19,6 +19,13 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Participants;
 use App\Models\Products;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+function returnArray()
+{
+    $data = DB::select("select * from participants where performance = (select max(performance) from participants)");
+    return $data;
+}
 
 Route::get('/', function () {
     return view(
@@ -26,7 +33,8 @@ Route::get('/', function () {
         [
             'heading' => "Anka Services",
             "participants" => Participants::all(),
-            "products" => Products::all()
+            "products" => Products::all(),
+            "winner" => returnArray()[0],
         ]
     );
 });
