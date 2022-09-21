@@ -1,7 +1,8 @@
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.File;
+import java.io.*;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
@@ -12,6 +13,19 @@ public class Main {
     static int num;
     public static File path = new File("./file.sql");
     public static File counterPath = new File("./counter.txt");
+    JSONParser jsonP = new JSONParser();
+      try {
+         JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("./file.json"));
+         String name = (String) jsonO.get("name");
+         String age = (String) jsonO.get("age");
+         String address = (String) jsonO.get("address");
+      } catch (FileNotFoundException e) {
+         e.printStackTrace();
+      } catch (IOException e) {
+         e.printStackTrace();
+      } catch (ParseException e) {
+         e.printStackTrace();
+      }
 
     public static void main(String[] args) throws IOException {
         System.out.println("Register");
