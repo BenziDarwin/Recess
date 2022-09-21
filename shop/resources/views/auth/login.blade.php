@@ -8,6 +8,11 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+                    @error("failed")
+                    <div class="m-3">
+                        <center><b>{{$message}}</b></center>
+                    </div>
+                    @enderror
                     <form method="POST" action="{{route('authenticate')}}">
                         @csrf
                         <div class="row mb-3">
