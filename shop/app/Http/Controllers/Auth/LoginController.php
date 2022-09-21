@@ -7,7 +7,9 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -52,23 +54,22 @@ class LoginController extends Controller
             'name' => 'required',
             'password' => 'required',
         ]);
+        $name = $request->name;
+        $password = $request->password;
         // Attempt to log the user in
-        if (Auth::guard('admin')->attempt(['name' => $request->name, 'password' => $request->password])) {
+        if (count(DB::select("select * from admins where name = ? and password = ?", [$name, $password])) >= 1) {
             // if successful, then redirect to their intended location
-            dd("correct Admin");
+            Session::put("name", $name);
             return redirect()->intended('/dashboard');
-        } else if (Auth::guard('customer')->attempt(['name' => $request->name, 'password' => $request->password])) {
-            dd("correct Customer");
+        } else if (count(DB::select("select * from customers where name = ? and password = ?", [$name, $password])) >= 1) {
+            Session::put("name", $name);
             return redirect()->intended('/home');
         }
+        return back()->withErrors(["failed" => "invalid info!"]);
     }
     public function logout()
     {
-        if (Auth::guard('admin')->check()) {
-            Auth::guard('admin')->logout();
-        } elseif (Auth::guard('customer')->check()) {
-            Auth::guard('customer')->logout();
-        }
+        Session::forget("name");
         return redirect('/');
     }
 }

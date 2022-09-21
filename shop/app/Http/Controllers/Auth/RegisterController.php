@@ -7,6 +7,8 @@ use App\Models\Customer;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -65,10 +67,13 @@ class RegisterController extends Controller
             'address' => $request['address'],
             'password' => $request['password'],
         ]);
-        if (Auth::guard('customer')->attempt(array('name' => $request->name, 'password' => $request->password))) {
-            dd("correct");
+
+        $name = $request->name;
+        $password = $request->password;
+
+        if (count(DB::select("select * from customers where name = ? and password = ?", [$name, $password])) >= 1) {
+            Session::put("name", $name);
             return redirect()->intended('/home');
         }
-        return redirect()->intended('/dashboard');
     }
 }
