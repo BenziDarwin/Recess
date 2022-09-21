@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ReceiptController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +19,13 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Participants;
 use App\Models\Products;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+function returnArray()
+{
+    $data = DB::select("select * from participants where performance = (select max(performance) from participants)");
+    return $data;
+}
 
 Route::get('/', function () {
     return view(
@@ -24,7 +33,8 @@ Route::get('/', function () {
         [
             'heading' => "Anka Services",
             "participants" => Participants::all(),
-            "products" => Products::all()
+            "products" => Products::all(),
+            "winner" => returnArray()[0],
         ]
     );
 });
@@ -34,7 +44,7 @@ Route::get('/dashboard', function () {
         'dashboard'
     );
 });
-Auth::routes();
+
 Route::get('/items/{participantID}/{productID}', function ($participantID, $productID) {
     return view(
         "product",
@@ -45,5 +55,13 @@ Route::get('/items/{participantID}/{productID}', function ($participantID, $prod
         ]
     );
 });
+Auth::routes();
+Route::get('/logout', [LoginController::class, 'logout']);
 
-Route::post("/authenticate", [CustomersController::class, "authenticate"]);
+Route::get('/login', [LoginController::class, "getLogin"])->name('login');
+
+Route::post('/create', [RegisterController::class, "createCustomer"])->name('create');
+
+Route::post('/authenticate', [LoginController::class, 'postLogin'])->name("authenticate");
+
+Route::post('/purchase', [ReceiptController::class, "addToReceiptTable"])->name('purchase');

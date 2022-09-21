@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use App\Models\Customers;
+use App\Models\Customer;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/welcome';
 
     /**
      * Create a new controller instance.
@@ -39,6 +39,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('guest:customer');
     }
 
     /**
@@ -56,18 +57,18 @@ class RegisterController extends Controller
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
+    protected function createCustomer(Request $request)
     {
-        return Customers::create([
-            'name' => $data['name'],
-            'password' => $data['password'],
-            'address' => $data['address'],
+        $this->validator($request->all())->validate();
+        Customer::create([
+            'name' => $request['name'],
+            'address' => $request['address'],
+            'password' => $request['password'],
         ]);
+        if (Auth::guard('customer')->attempt(array('name' => $request->name, 'password' => $request->password))) {
+            dd("correct");
+            return redirect()->intended('/home');
+        }
+        return redirect()->intended('/dashboard');
     }
 }
