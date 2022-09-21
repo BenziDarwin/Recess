@@ -1,9 +1,5 @@
 import java.util.Scanner;
 import java.io.*;
-// import org.json.simple.JSONArray;
-// import org.json.simple.JSONObject;
-// import org.json.simple.parser.JSONParser;
-// import org.json.simple.parser.ParseException;
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
@@ -15,23 +11,8 @@ public class Main {
     public static File path = new File("./file.sql");
     public static File counterPath = new File("./counter.txt");
 
-    @SuppressWarnings("unchecked")
     public static void main(String[] args) throws IOException {
-        // JSONParser jsonP = new JSONParser();
-
-        // try (FileReader reader = new FileReader("./file.json")) {
-        // Object obj = jsonP.parse(reader);
-        // JSONArray participantList = (JSONArray) obj;
-        // System.out.println(participantList);
-        // } catch (FileNotFoundException e) {
-        // e.printStackTrace();
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // } catch (ParseException e) {
-        // e.printStackTrace();
-        // }
         System.out.println("Register");
-        System.out.println("Performance");
         if (path.exists()) {
             file = new FileWriter("./file.sql", true);
         } else {
@@ -52,30 +33,27 @@ public class Main {
             count.close();
         }
 
-        command = sc.next();
-        if (command.equalsIgnoreCase("register")) {
-            // Add participant
-            System.out.println("Register name password product date_of_birth");
-            String name = sc.next();
-            String password = sc.next();
-            String product = sc.next();
-            String date_of_birth = sc.next();
-            String insertParticipant = "INSERT INTO PARTICIPANTS (name, password, product, DOB) VALUES ('%s', '%s', '%s', '%s');\n";
-            String value = String.format(insertParticipant, name, password, product, date_of_birth);
-            file.write(value);
-            System.out.println("Data inserted!");
-            // Add Product
-            System.out.println("Post_product product_name description");
-            String product_name = sc.next();
-            String description = sc.nextLine();
-            String insertProducts = "INSERT INTO PRODUCTS (ProductName, description, participantID) VALUES ('%s', '%s', "
-                    + num + ");\n";
-            value = String.format(insertProducts, product_name, description);
-            System.out.println("Data inserted!");
-            file.write(value);
-            file.close();
-        } else if (command.equalsIgnoreCase("performance")) {
-            System.out.println("Your performance info.");
-        }
+        // Add participant
+        System.out.println("Register name password product date_of_birth");
+        String name = sc.next();
+        String password = sc.next();
+        String product = sc.next();
+        String date_of_birth = sc.next();
+        String insertParticipant = "INSERT INTO PARTICIPANTS (name, password, product, DOB) VALUES ('%s', '%s', '%s', '%s');\n";
+        String value = String.format(insertParticipant, name, password, product, date_of_birth);
+        file.write(value);
+        System.out.println("Data inserted!");
+
+        // Add Product
+        System.out.println("Post_product product_name description");
+        String product_name = sc.next();
+        String description = sc.nextLine();
+        String insertProducts = "INSERT INTO PRODUCTS (ProductName, description, participantID) VALUES ('%s', '%s', "
+                + num + ");\n";
+        value = String.format(insertProducts, product_name, description);
+        System.out.println("Data inserted!");
+        file.write(value);
+        file.close();
+
     }
 }
