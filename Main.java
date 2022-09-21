@@ -1,7 +1,9 @@
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.File;
+import java.io.*;
+// import org.json.simple.JSONArray;
+// import org.json.simple.JSONObject;
+// import org.json.simple.parser.JSONParser;
+// import org.json.simple.parser.ParseException;
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
@@ -13,7 +15,21 @@ public class Main {
     public static File path = new File("./file.sql");
     public static File counterPath = new File("./counter.txt");
 
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) throws IOException {
+        // JSONParser jsonP = new JSONParser();
+
+        // try (FileReader reader = new FileReader("./file.json")) {
+        // Object obj = jsonP.parse(reader);
+        // JSONArray participantList = (JSONArray) obj;
+        // System.out.println(participantList);
+        // } catch (FileNotFoundException e) {
+        // e.printStackTrace();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // } catch (ParseException e) {
+        // e.printStackTrace();
+        // }
         System.out.println("Register");
         System.out.println("Performance");
         if (path.exists()) {
