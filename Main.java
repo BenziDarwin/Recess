@@ -12,7 +12,6 @@ public class Main {
     public static File counterPath = new File("./counter.txt");
 
     public static void main(String[] args) throws IOException {
-        System.out.println("Register");
         if (path.exists()) {
             file = new FileWriter("./file.sql", true);
         } else {
