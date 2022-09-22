@@ -8,8 +8,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="card-title text-uppercase text-muted mb-0">Traffic</h5>
-                                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Total Users</h5>
+                                    <span class="h2 font-weight-bold mb-0">{{count($participants)}}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -25,8 +25,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
-                                    <span class="h2 font-weight-bold mb-0">2,356</span>
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Total Customers</h5>
+                                    <span class="h2 font-weight-bold mb-0">{{count($customers)}}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -42,8 +42,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
-                                    <span class="h2 font-weight-bold mb-0">924</span>
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Total Sales</h5>
+                                    <span class="h2 font-weight-bold mb-0">{{$quantity}}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">

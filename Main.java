@@ -12,6 +12,7 @@ public class Main {
     public static File counterPath = new File("./counter.txt");
 
     public static void main(String[] args) throws IOException {
+        System.out.println(set);
         if (path.exists()) {
             file = new FileWriter("./file.sql", true);
         } else {
@@ -41,7 +42,7 @@ public class Main {
         String insertParticipant = "INSERT INTO PARTICIPANTS (name, password, product, DOB) VALUES ('%s', '%s', '%s', '%s');\n";
         String value = String.format(insertParticipant, name, password, product, date_of_birth);
         file.write(value);
-        System.out.println("Data inserted!");
+        System.out.println("\nData inserted!");
 
         // Add Product
         System.out.println("Post_product product_name description");
@@ -50,7 +51,7 @@ public class Main {
         String insertProducts = "INSERT INTO PRODUCTS (ProductName, description, participantID) VALUES ('%s', '%s', "
                 + num + ");\n";
         value = String.format(insertProducts, product_name, description);
-        System.out.println("Data inserted!");
+        System.out.println("\nData inserted!");
         file.write(value);
         file.close();
 

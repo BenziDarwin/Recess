@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ReceiptController;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Models\Participants;
 use App\Models\Products;
+use App\Models\Receipt;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -27,6 +29,16 @@ function returnArray()
     return $data;
 }
 
+
+function returnTotalProducts()
+{
+    $data = DB::select("select * from receipts");
+    $n = 0;
+    foreach ($data as $item) {
+        $n = $n + $item->{"quantity"};
+    };
+    return $n;
+}
 Route::get('/', function () {
     return view(
         'home',
@@ -41,7 +53,13 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view(
-        'dashboard'
+        'dashboard',
+        [
+            "participants" => Participants::all(),
+            "customers" => Customer::all(),
+            "quantity" => returnTotalProducts(),
+            "receipts" => Receipt::all()
+        ]
     );
 });
 

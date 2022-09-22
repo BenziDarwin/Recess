@@ -73,7 +73,7 @@ class RegisterController extends Controller
 
         if (count(DB::select("select * from customers where name = ? and password = ?", [$name, $password])) >= 1) {
             Session::put("name", $name);
-            return redirect()->intended('/home');
+            return redirect()->intended('/');
         }
     }
 }
